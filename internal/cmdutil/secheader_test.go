@@ -263,6 +263,16 @@ func TestBaseSecurityHeaders_AllRequiredHeaders(t *testing.T) {
 	}
 }
 
+func TestBaseSecurityHeaders_IncludesPPEHeaders(t *testing.T) {
+	h := BaseSecurityHeaders()
+	if v := h.Get(HeaderTTEnv); v != TTEnvPPEValue {
+		t.Errorf("BaseSecurityHeaders()[%s] = %q, want %q", HeaderTTEnv, v, TTEnvPPEValue)
+	}
+	if v := h.Get(HeaderUsePPE); v != UsePPEValue {
+		t.Errorf("BaseSecurityHeaders()[%s] = %q, want %q", HeaderUsePPE, v, UsePPEValue)
+	}
+}
+
 // ---------------------------------------------------------------------------
 // AgentTraceValue / HeaderAgentTrace
 // ---------------------------------------------------------------------------

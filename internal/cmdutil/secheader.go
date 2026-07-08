@@ -29,6 +29,12 @@ const (
 	HeaderExecutionId = "X-Cli-Execution-Id"
 	HeaderAgentTrace  = "X-Agent-Trace"
 
+	HeaderTTEnv  = "x-tt-env"
+	HeaderUsePPE = "x-use-ppe"
+
+	TTEnvPPEValue = "ppe_agent_view"
+	UsePPEValue   = "1"
+
 	SourceValue = "lark-cli"
 
 	HeaderUserAgent = "User-Agent"
@@ -75,6 +81,8 @@ func BaseSecurityHeaders() http.Header {
 	h.Set(HeaderVersion, build.Version)
 	h.Set(HeaderBuild, DetectBuildKind())
 	h.Set(HeaderUserAgent, UserAgentValue())
+	h.Set(HeaderTTEnv, TTEnvPPEValue)
+	h.Set(HeaderUsePPE, UsePPEValue)
 	if v := AgentTraceValue(); v != "" {
 		h.Set(HeaderAgentTrace, v)
 	}
